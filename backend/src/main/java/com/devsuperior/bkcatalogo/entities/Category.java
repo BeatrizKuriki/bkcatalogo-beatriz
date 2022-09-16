@@ -3,15 +3,29 @@ package com.devsuperior.bkcatalogo.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 //Serializable é um padrao da linguagem java para que o obj java possa ser convertido em bytes
 //com Serializable o objeto pode ser gravado em arquivos, passa nas redes(**prática muito importante)
+
+@Entity
+@Table(name = "tb_category")
 public class Category implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	
 	
 	public Category() {
 		

@@ -1,14 +1,15 @@
 package com.devsuperior.bkcatalogo.resources;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.bkcatalogo.entities.Category;
+import com.devsuperior.bkcatalogo.services.CategoryService;
 
 /*
  * Sempre que um recurso tiver a ver com uma entidade a clase será nomeada com o nome da entidade 
@@ -34,11 +35,12 @@ public class CategoryResource {
 	 * Como se o recurso fosse um conceito e o controlador a forma de implementar esse conceito
 	 * ABAIXO SERÁ CRIADO O PRIMEIRO ENDPOINT- PRIMEIRA ROTA POSSÍVEL QUE VAI RESPONDER ALGUMA COISA
 	 */
+	
+	@Autowired
+	private CategoryService service;
 	@GetMapping
 	public ResponseEntity<List<Category>>findAll(){
-		List<Category> list = new ArrayList<>();
-		list.add(new Category(1L, "Books"));
-		list.add(new Category(2L, "Eletronics"));
+		List<Category> list = service.findAll();		
 		return ResponseEntity.ok().body(list);
 		
 	}
