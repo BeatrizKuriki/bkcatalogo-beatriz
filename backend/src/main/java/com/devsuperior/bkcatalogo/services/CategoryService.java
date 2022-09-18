@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 /*
  * A annotation @Service serve para registrar a classe como um componente que vai participar do sistema 
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.bkcatalogo.dto.CategoryDTO;
 import com.devsuperior.bkcatalogo.entities.Category;
 import com.devsuperior.bkcatalogo.repositories.CategoryRepository;
+import com.devsuperior.bkcatalogo.services.exceptions.DataBaseException;
 import com.devsuperior.bkcatalogo.services.exceptions.ResourceNotFoundException;
 
 
@@ -69,6 +72,21 @@ public class CategoryService {
 		}
 		
 	
+	}
+	
+	public void delete(Long id) {
+		try {
+		repository.deleteById(id);
+		}
+		catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found "+id);
+		}
+		
+		catch(DataIntegrityViolationException e) {
+			throw new DataBaseException ("Integrity violation.");
+		}
+		
+		
 	}
 	
 
