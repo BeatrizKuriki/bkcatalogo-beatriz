@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  * dos objetos do tipo CategoryService vai ser o Spring.Todo framework moderno tem algum mecanismo de injeção de 
  * dependências automatizado.
  */
+import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.bkcatalogo.entities.Category;
 import com.devsuperior.bkcatalogo.repositories.CategoryRepository;
@@ -21,6 +22,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
+	@Transactional(readOnly = true)
 	public List<Category>findAll(){
 		return repository.findAll();
 		
