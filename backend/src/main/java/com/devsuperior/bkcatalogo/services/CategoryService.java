@@ -1,6 +1,6 @@
 package com.devsuperior.bkcatalogo.services;
 
-import java.util.List;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -9,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 /*
  * A annotation @Service serve para registrar a classe como um componente que vai participar do sistema 
@@ -33,10 +35,10 @@ public class CategoryService {
 	private CategoryRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<CategoryDTO> findAll() {
-		List<Category> list = repository.findAll();
+	public Page<CategoryDTO> findAllPaged(PageRequest pageResquest) {
+		Page<Category> list = repository.findAll(pageResquest);
 
-		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
+		return list.map(x -> new CategoryDTO(x));
 
 		/*
 		 * List<CategoryDTO> listDTO = new ArrayList<>(); for(Category cat : list ) {
