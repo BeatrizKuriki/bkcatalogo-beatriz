@@ -28,7 +28,7 @@ public class CategoryService {
 	public List<CategoryDTO> findAll() {
 		List<Category> list = repository.findAll();
 
-		return list.stream().map(x -> new CategoryDTO()).collect(Collectors.toList());
+		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
 
 		/*
 		 * List<CategoryDTO> listDTO = new ArrayList<>(); for(Category cat : list ) {
