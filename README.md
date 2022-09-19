@@ -1,5 +1,7 @@
-# bkcatalogo
-Em construção
+# bkcatalogo-Em construção
+
+
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/BeatrizKuriki/bkcatalogo-beatriz/blob/main/LICENSE)
 
 Projeto CRUD de produtos
 
